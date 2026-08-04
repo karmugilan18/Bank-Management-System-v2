@@ -48,6 +48,7 @@ print("\n === Deposit Tests ====")
 account1.deposit(2000)
 account1.deposit(-500)
 account1.deposit(0)
+account1.deposit(50000)
 
 print("\n === Withdraw tests ===")
 account1.withdraw(1000)
