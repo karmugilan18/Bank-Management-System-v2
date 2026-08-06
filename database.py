@@ -83,8 +83,26 @@ class Database:
             self.connection.commit()
         except Error as e:
             print(f"Error logging transaction: {e}")
+#--- history --
+    def get_transaction_history(self, account_number):
+        try:
+            query ="""select t.transaction_id , t.transaction_type , t.amount , t.timestamp , a.account_number , c.full_name from transactions t join accounts a on t.account_id = a.account_id join customers c on a.customer_id = c.customer_id where a.account_number = %s order by t.timestamp desc limit 10 """
+            self.cursor.execute(query , (account_number ,))
+            results = self.cursor.fetchall()
+            return results  
 
+        except Error as e:
+            print(f"Error fetching transaction history :{e}")
+            return []
 
+    def get_account_by_id(self , account_id):
+        try:
+            query = "select * form accounts where account_id = %s"
+            self.cursor.execute(query  , (account_id,))
+            return  self.cursor.fetchone()
+        except Error as e:
+            print(f"Error fetching account by ID : {e}")
+            return None
 # --- Testing ---
 if __name__ == "__main__":
     db = Database()
