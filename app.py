@@ -54,3 +54,10 @@ class BaseScreen (tk.Frame):
 
 
 
+# Login 
+class LoginScreen(BaseScreen):
+    def __init__(self, parent , app):
+        super().__init__(parent , app)
+        self.build_ui()
+
+    
