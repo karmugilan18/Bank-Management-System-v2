@@ -35,7 +35,8 @@ def make_label (parent , text , font = FONT_LABEL , fg = TEXT_COLOR , bg = CARD_
 def make_card(parent , padx = 30 , pady = 30 ):
     return tk.Frame (parent , bg = CARD_COLOR , padx = padx ,pady =pady)
 
-#Screen base class - all inherits this 
+#Screen base class - all inherits this make it easy 
+ 
 class BaseScreen (tk.Frame):
     """Every screen inherits from this Provides common bg and reference to app"""
 
