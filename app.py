@@ -2,7 +2,7 @@ import tktinter as tk
 from tkinter import messagebox
 
 # constants 
-BG_COLOR      = "#1e1e2e"
+BG_COLOR      = "#858585"
 CARD_COLOR    = "#2a2a3e"
 SIDEBAR_COLOR = "#16162a"
 ACCENT_COLOR  = "#7c6af7"
