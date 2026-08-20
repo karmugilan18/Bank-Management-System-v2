@@ -61,4 +61,39 @@ class LoginScreen(BaseScreen):
         super().__init__(parent , app)
         self.build_ui()
 
-    
+    def build_ui(self):
+        card = make_card(self, padx=50 , pady= 50)
+        card.place(relx= 0.5 , rely = 0.5 , anchor = "center")
+
+        make_label (card,"Bank Managament " , font = FONT_TITLE ).grid(row = 0, column  = 0 , columnspan = 2 , pady = (0,6))
+        make_label (card, "sign in to continue" , font = FONT_SMALL, fg =MUTED_COLOR).grid (row = 1, column =0, columnspan = 2 , pady =(0, 28))
+        make_label(card, "Username").grid(row=2, column=0, sticky="w", pady=(0, 4))
+        self.username_var = tk.StringVar()
+        self.username_entry = make_entry(card)
+        self.username_entry.grid (row = 3, column = 0 , columnspan = 2 , sticky = "ew" , ipady = 8 , pady =(0, 16))
+
+        make_label(card, "Password").grid(row=4, column=0, sticky="w", pady=(0, 4))
+        self.password_entry = make_entry(card, show="*")
+        self.password_entry.grid(row=5, column=0, columnspan=2,
+                                  sticky="ew", ipady=8, pady=(0, 24))
+
+        make_button (card , "Login" , self.handle_login).grid(row = 6 , column = 0  , columnspan =2 , sticky = "ew")
+        
+
+        self.msg = make_label(card, "", font=FONT_SMALL, fg=ERROR_COLOR)
+        self.msg.grid(row=7, column=0, columnspan=2, pady=(10, 0))
+
+        make_label(card, "Hint: admin / admin123", font=FONT_SMALL,
+                   fg=MUTED_COLOR).grid(row=8, column=0, columnspan=2, pady=(16, 0))
+        self.password_entry.bind("<Return>", lambda e: self.handle_login())
+        self.username_entry.focus()
+
+
+    def handle_login(self):
+        u = self.username_entry.get().strip()
+        p = self.password_entry.get().strip()
+        if u == "admin" and p == "admin123":
+            self.app.show_main()
+        else:
+            self.show_error(self.msg, "Invalid username or password.")
+            self.password_entry.delete(0, tk.END)
