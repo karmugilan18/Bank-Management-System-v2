@@ -97,3 +97,45 @@ class LoginScreen(BaseScreen):
         else:
             self.show_error(self.msg, "Invalid username or password.")
             self.password_entry.delete(0, tk.END)
+
+
+#DashBoard Screen
+
+class DashboardScreen(BaseScreen):
+
+    def __init__ (self , parent , app):
+        super().__init__(parent , app)
+        self.build_ui()
+
+    def build_ui(self):
+        #Welcome Banner 
+        banner = tk.Frame(self, bg=ACCENT_COLOR , pady= 20)
+        banner.pack(fill ="x", padx= 30 , pady = (30,20))
+
+        tk.Label(banner , text = "Dashboard", font = FONT_TITLE , bg = ACCENT_COLOR , fg = TEXT_COLOR ).pack()
+        tk.Label(banner , text = "Welcome back ,Admin!" , font = FONT_LABEL , bg = ACCENT_COLOR , fg = TEXT_COLOR).pack()
+
+        #Stats Cards ROW 
+        stats_frame = tk.Frame(self, bg= BG_COLOR)
+        stats_frame.pack(fill ="x", padx =30)
+
+        stats =[(
+            "Customers", "Manage accounts", "#7c6af7")
+             ("💰 Deposits",     "Add money",          "#a6e3a1"),
+            ("💸 Withdrawals",  "Withdraw money",     "#f38ba8"),
+            ("📋 History",      "View transactions",  "#fab387"),
+            ]
+
+        for i , (title , sub , color ) in enumerate(stats):
+            card = tk.Frame (stats_frame , bg= color , padx = 20 , pady = 20 , width = 160)
+            card.grid(row= 0 , column = i  , padx = 8 , pady = 8, sticky = "nsew")
+            stats.frame.columnconfigure(i , weight = 1 )
+            tk.Label(card, text=title, font=FONT_SUBTITLE,
+                     bg=color, fg=TEXT_COLOR).pack()
+            tk.Label(card, text=sub, font=FONT_SMALL,
+                     bg=color, fg=TEXT_COLOR).pack()
+         # Quick guide
+        guide = make_card(self, padx=30, pady=20)
+        guide.pack(fill="x", padx=30, pady=20)
+        make_label(guide, "👈 Use the sidebar to navigate",
+                   font=FONT_LABEL, fg=MUTED_COLOR).pack()
