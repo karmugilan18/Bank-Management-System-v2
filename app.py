@@ -139,3 +139,20 @@ class DashboardScreen(BaseScreen):
         guide.pack(fill="x", padx=30, pady=20)
         make_label(guide, "👈 Use the sidebar to navigate",
                    font=FONT_LABEL, fg=MUTED_COLOR).pack()
+
+#place holder screen (for lessons 9-11)
+
+class PlaceholderScreen(BaseScreen):
+    def __init__(self, parent , app , title ,emoji):
+        super().__init__(parent , app)
+        self.title_text = title
+        self.emoji = emoji
+        self.build_ui()
+
+    def build_ui(self):
+        card = make_card(self)
+        card.place3(relx= 0.5 , rely =0.5 , anchor ="center")
+        tk.Label(card , text = self.emoji , font =("Segoe UI", 48 ), bg= CARD_COLOR ).pack(pady=(0,10))
+        make_label(card, self.title_text , font = FONT_TITLE).pack()
+        make_label(card, "Coming in the next lesson!", font = FONT_LABEL,fg=MUTED_COLOR).pack(pady=(8,0))
+        
